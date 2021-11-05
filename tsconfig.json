@@ -19,6 +19,8 @@
       "page/*":["./src/page/*"],
       "route": ["./src/route"],
       "assets/": ["./src/assets/"],
+      "store": ["./src/store"],
+      "utils": ["./src/utils"],
       "components/": ["./src/components/"],
     }
   },

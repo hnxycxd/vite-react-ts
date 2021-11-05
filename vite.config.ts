@@ -16,6 +16,8 @@ export default defineConfig({
       page: resolve('src/page'),
       route: resolve('src/route'),
       assets: resolve('src/assets'),
+      store: resolve('src/store'),
+      utils: resolve('src/utils'),
       components: resolve('src/components'),
     },
   },
@@ -27,6 +29,7 @@ export default defineConfig({
           '@primary-color': '#558cff',
         },
       },
+      // scss: {},
     },
   },
   plugins: [
