@@ -12,6 +12,7 @@ interface IData {
   name: string;
   age: number;
   addr: string;
+  children?: IData[];
 }
 
 const Index = (props: any) => {
@@ -35,23 +36,42 @@ const Index = (props: any) => {
   ];
 
   useEffect(() => {
-    const randomData = Array.from({ length: 1000 }, (_, key) => ({
+    const randomData: IData[] = Array.from({ length: 100 }, (_, key) => ({
       key,
       name: CN(2),
       age: Math.random(),
       addr: CN(4),
     }));
-
+    randomData[0].children = Array.from({ length: 20 }, (_, key) => ({
+      key,
+      name: CN(3),
+      age: Math.random(),
+      addr: CN(4),
+    }));
     setData(randomData);
     console.log('tableRef', tableRef.current);
 
-    // const tbody = document.querySelector()
+    const tbody = document.querySelector(`.${styles.idx} .ant-table-body`);
+    tbody?.addEventListener('scroll', function (e: any) {
+      console.log('scroll e', e.target.scrollTop);
+      const scrollTop = e.target.scrollTop;
+      if (scrollTop > 800) {
+        // data.splice(0, 10);
+        setData(data.filter((_, i) => i));
+      }
+    });
+    console.log('tbody', tbody);
   }, []);
 
-  // useEffect(() => {
+  const renderRow = ({ children, ...otherProps }: any) => {
+    return (
+      <tr {...otherProps} c-data="a">
+        {children}
+      </tr>
+    );
+  };
 
-  // }, [])
-  console.log(data);
+  console.log('--data', data);
   return (
     <div className={styles.idx} ref={tableRef}>
       <Table
@@ -59,6 +79,9 @@ const Index = (props: any) => {
         columns={columns}
         dataSource={data}
         pagination={false}
+        components={{
+          body: { row: renderRow },
+        }}
         scroll={{ y: 400 }}
         showSorterTooltip={false}
       />

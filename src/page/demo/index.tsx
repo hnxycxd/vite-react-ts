@@ -1,34 +1,42 @@
-import React, { useEffect } from 'react';
-import styles from './style.module.scss';
+import * as React from 'react';
+import moment from 'moment';
+import { DatePicker } from 'antd';
+import 'moment/locale/zh-cn';
+import locale from 'antd/es/date-picker/locale/zh_CN';
 
-const Demo = () => {
-  useEffect(() => {
-    const _arr = [3, 4, 5, 6, 7, 8, 9]; //len = 7;
-    const _num = 9; //index
+// const quarter = ['03-31', '06-30', '09-30', '12-31'];
+const quarter = ['03', '06', '09', '12'];
+const y4m2 = 'YYYY-MM';
+const params: string[] = [];
 
-    function findNum(arr: number[], num: number) {
-      debugger;
-      let min_index = 0;
-      let max_index = arr.length - 1;
-      let resultIndex;
-      while (arr[min_index] < arr[max_index]) {
-        let mid_index = Math.floor((max_index - min_index) / 2);
-        if (num < arr[mid_index]) {
-          max_index = mid_index;
-        } else if (num > arr[mid_index]) {
-          min_index = mid_index;
-        } else {
-          resultIndex = mid_index;
-          break;
-        }
+const Index = () => {
+  const handleDate = (date: any) => {
+    let [start, end] = [date[0].format('YYYY-MM'), date[1].format('YYYY-MM')];
+    const [startYear] = start.split('-');
+    let i = 0;
+    while (start <= end) {
+      if (i >= quarter.length) {
+        i = 0;
       }
-      return resultIndex;
+      if (start === `${startYear}-${quarter}[${i}]`) {
+        params.push(start);
+      }
+      start = moment(start).add(1, 'M').format(y4m2);
+      i++;
     }
+    // start = moment(start).add(1, 'M').format(y4m2);
 
-    const index = findNum(_arr, _num);
-    console.log('index', index);
-  });
-  return <div className={styles.demoPage}>aa</div>;
+    console.log('date', start, end);
+    console.log('params', params);
+  };
+  return (
+    <DatePicker.RangePicker
+      allowClear={false}
+      picker="month"
+      locale={locale}
+      onChange={handleDate}
+    />
+  );
 };
 
-export default Demo;
+export default Index;
