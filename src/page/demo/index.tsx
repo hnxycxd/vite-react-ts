@@ -1,41 +1,34 @@
 import * as React from 'react';
-import moment from 'moment';
-import { DatePicker } from 'antd';
+// import moment from 'moment';
+import { Button } from 'antd';
 import 'moment/locale/zh-cn';
-import locale from 'antd/es/date-picker/locale/zh_CN';
+// import locale from 'antd/es/date-picker/locale/zh_CN';
+import store from 'store';
 
-// const quarter = ['03-31', '06-30', '09-30', '12-31'];
-const quarter = ['03', '06', '09', '12'];
-const y4m2 = 'YYYY-MM';
-const params: string[] = [];
+const reducer = (state: any, action: any) => ({ ...state, ...action });
+const initState = {
+  name: 'zs',
+};
 
 const Index = () => {
-  const handleDate = (date: any) => {
-    let [start, end] = [date[0].format('YYYY-MM'), date[1].format('YYYY-MM')];
-    const [startYear] = start.split('-');
-    let i = 0;
-    while (start <= end) {
-      if (i >= quarter.length) {
-        i = 0;
-      }
-      if (start === `${startYear}-${quarter}[${i}]`) {
-        params.push(start);
-      }
-      start = moment(start).add(1, 'M').format(y4m2);
-      i++;
-    }
-    // start = moment(start).add(1, 'M').format(y4m2);
+  const [n, setN] = React.useState(store.getState().n);
+  const [state, dispatch] = React.useReducer(reducer, initState);
 
-    console.log('date', start, end);
-    console.log('params', params);
-  };
+  // store.subscribe(() => {
+  //   setN(store.getState().n);
+  // });
+
   return (
-    <DatePicker.RangePicker
-      allowClear={false}
-      picker="month"
-      locale={locale}
-      onChange={handleDate}
-    />
+    <>
+      <Button
+        onClick={() => {
+          store.dispatch({ type: 'aaa', payload: { aa: 'aa' } });
+        }}
+      >
+        btn
+      </Button>
+      <div>{n}</div>
+    </>
   );
 };
 
