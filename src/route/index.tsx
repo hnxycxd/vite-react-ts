@@ -1,34 +1,50 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect, useLayoutEffect } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import debounce from 'lodash/debounce';
 import Header from '../layout/header';
+import Content from '../layout/content';
 import routeList from './data';
-import 'assets/less/reset.less';
 
-const rootRoute = () => {
-  const { menuRoute, mainRoute } = routeList;
+const baseSize = 14;
+const RootRoute = () => {
+  const { mainRoute } = routeList;
+  const setRem = debounce(() => {
+    console.log('--setRem');
+    const proportion = document.documentElement.clientWidth / 375;
+    document.documentElement.style.fontSize = proportion * baseSize + 'px';
+  }, 500);
 
+  // useLayoutEffect(() => {
+  //   setRem();
+  //   window.addEventListener('resize', setRem);
+  //   return () => {
+  //     window.removeEventListener('resize', setRem);
+  //   };
+  // }, []);
   return (
     <BrowserRouter>
-      {/* <Header route={menuRoute} /> */}
-      <Suspense fallback={<div>loading...</div>}>
-        <Switch>
-          {mainRoute.map((item) => {
-            if (item.component) {
-              return (
-                <Route
-                  key={item.key}
-                  path={item.path}
-                  exact={item.exact}
-                  render={(props) => <item.component {...props} subRoute={item.children} />}
-                />
-              );
-            }
-            return null;
-          })}
-        </Switch>
+      <Header route={mainRoute} />
+      <Suspense fallback={null}>
+        <Content>
+          <Switch>
+            {mainRoute.map((item) => {
+              if (item.component) {
+                return (
+                  <Route
+                    key={item.key}
+                    path={item.path}
+                    exact={item.exact}
+                    render={(props) => <item.component {...props} subRoute={item.children} />}
+                  />
+                );
+              }
+              return null;
+            })}
+          </Switch>
+        </Content>
       </Suspense>
     </BrowserRouter>
   );
 };
 
-export default rootRoute;
+export default RootRoute;

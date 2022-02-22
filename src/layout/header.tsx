@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { Layout, Menu } from 'antd';
+import { getPageName } from 'src/utils';
 import './style.less';
 
 const { Header } = Layout;
@@ -13,7 +14,7 @@ const HeadMenu = (props: IProps) => {
   const { route } = props;
   const history = useHistory();
   const location = useLocation();
-  const [selectedKeys, setSelectedKeys] = useState<string>('index');
+  const [selectedKeys, setSelectedKeys] = useState<string>('');
 
   const menuClick = (menu: { key: string }) => {
     history.push(`/${menu.key}`);
@@ -25,6 +26,7 @@ const HeadMenu = (props: IProps) => {
     setSelectedKeys(key);
   }, [location.pathname]);
 
+  // console.log('getPageName', getPageName());
   return (
     <Layout className="layout">
       <Header>

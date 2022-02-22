@@ -1,6 +1,7 @@
 type StringMap = Record<string, string>;
 
 declare module 'assets/*';
+declare var require;
 
 interface IRouteItem {
   key: string;

@@ -1,35 +1,37 @@
-import * as React from 'react';
-// import moment from 'moment';
-import { Button } from 'antd';
-import 'moment/locale/zh-cn';
-// import locale from 'antd/es/date-picker/locale/zh_CN';
-import store from 'store';
+import React from 'react';
+// import { Upload } from 'antd';
+import A from './A';
+import B from './B';
+import C from './C';
 
-const reducer = (state: any, action: any) => ({ ...state, ...action });
-const initState = {
-  name: 'zs',
-};
+class Demo extends React.Component {
+  constructor(props: any) {
+    super(props);
+    console.log('demo constructor');
+  }
+  componentDidMount() {
+    console.log('Demo componentDidMount');
+  }
+  componentDidUpdate() {
+    console.log('Demo componentDidUpdate');
+  }
+  componentWillUnmount() {
+    console.log('Demo componentWillUnmount');
+  }
+  render() {
+    console.log('demo render');
+    return (
+      <div>
+        Demo
+        <A />
+        {/* <A>
+          <B>
+            <C />
+          </B>
+        </A> */}
+      </div>
+    );
+  }
+}
 
-const Index = () => {
-  const [n, setN] = React.useState(store.getState().n);
-  const [state, dispatch] = React.useReducer(reducer, initState);
-
-  // store.subscribe(() => {
-  //   setN(store.getState().n);
-  // });
-
-  return (
-    <>
-      <Button
-        onClick={() => {
-          store.dispatch({ type: 'aaa', payload: { aa: 'aa' } });
-        }}
-      >
-        btn
-      </Button>
-      <div>{n}</div>
-    </>
-  );
-};
-
-export default Index;
+export default Demo;

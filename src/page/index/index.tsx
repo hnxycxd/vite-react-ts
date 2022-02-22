@@ -1,5 +1,5 @@
 import React, { ReactNode, useEffect, useRef, useState } from 'react';
-import { Table } from 'antd';
+import { Table, Menu, Card, Button } from 'antd';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { CN } from 'utils';
@@ -49,18 +49,18 @@ const Index = (props: any) => {
       addr: CN(4),
     }));
     setData(randomData);
-    console.log('tableRef', tableRef.current);
+    // console.log('tableRef', tableRef.current);
 
     const tbody = document.querySelector(`.${styles.idx} .ant-table-body`);
     tbody?.addEventListener('scroll', function (e: any) {
-      console.log('scroll e', e.target.scrollTop);
+      // console.log('scroll e', e.target.scrollTop);
       const scrollTop = e.target.scrollTop;
       if (scrollTop > 800) {
         // data.splice(0, 10);
         setData(data.filter((_, i) => i));
       }
     });
-    console.log('tbody', tbody);
+    // console.log('tbody', tbody);
   }, []);
 
   const renderRow = ({ children, ...otherProps }: any) => {
@@ -71,10 +71,16 @@ const Index = (props: any) => {
     );
   };
 
-  console.log('--data', data);
+  // console.log('--routes', routes);
   return (
     <div className={styles.idx} ref={tableRef}>
-      <Table
+      index
+      <Card title="静夜思">
+        <div>床前明月光，疑似地上霜。</div>
+        <div>举头望明月，低头思故乡。</div>
+      </Card>
+      <Button>button</Button>
+      {/* <Table
         bordered
         columns={columns}
         dataSource={data}
@@ -84,7 +90,7 @@ const Index = (props: any) => {
         }}
         scroll={{ y: 400 }}
         showSorterTooltip={false}
-      />
+      /> */}
     </div>
   );
 };

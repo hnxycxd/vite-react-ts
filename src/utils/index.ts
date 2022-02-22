@@ -1,3 +1,5 @@
+export { getPageName } from './getPageName';
+
 export function CN(len = 1) {
   let _rsl = '';
   while (len) {

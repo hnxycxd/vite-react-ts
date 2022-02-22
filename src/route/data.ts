@@ -87,6 +87,13 @@ const otherRoute: IRouteItem[] = [
     name: 'demo',
     component: lazy(() => import('../page/demo')),
   },
+  {
+    key: 'chart',
+    path: '/chart',
+    exact: true,
+    name: 'chart',
+    component: lazy(() => import('../page/chart')),
+  },
 ];
 
 const mainRoute = [...menuRoute, ...otherRoute];

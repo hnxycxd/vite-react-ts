@@ -3,6 +3,7 @@ html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pr
   font-style: normal;
   list-style-type: none;
   text-decoration: none;
+  box-sizing: border-box;
   // margin: 0;
   // padding: 0;
   // text-align: left;
@@ -10,19 +11,26 @@ html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pr
   // border: none;
   // color: #111;
 }
-
+html {
+  height: 100%;
+  width: 100%;
+}
 body {
   margin: 0;
   padding: 0;
+  height: 100%;
   background-color: #eee;
   font-family: Georgia,serif;
-  letter-spacing: -0.01em;
-  word-spacing: .2em;
-  line-height: 1.8em;
-  font-size: 62.5%;
+  // letter-spacing: -0.01em;
+  // word-spacing: .2em;
+  // line-height: 1.8em;
+  font-size: 14px;
   color: #111;
 }
 
 #root {
   height: 100%;
+  width: 100%;
+  // background-color: rgba(199, 237, 204, .1);
+  background-color: #fff;
 }

@@ -2,6 +2,7 @@ import React, { Suspense, useEffect } from 'react';
 import { Menu } from 'antd';
 import { RouteComponentProps, Switch, Route } from 'react-router-dom';
 import { MenuInfo } from 'rc-menu/lib/interface';
+import { getPageName } from 'src/utils';
 
 const { SubMenu } = Menu;
 
@@ -57,7 +58,8 @@ const List: React.FC<IProps> = (props) => {
     }
   }, [pathname]);
 
-  console.log('list components', props);
+  // console.log('list components', props);
+  console.log('getPageName', getPageName());
   return (
     <div style={{ height: 'calc(100% - 64px)', display: 'flex', justifyContent: 'space-between' }}>
       <div className="sideMenu" style={{ height: '100%' }}>
