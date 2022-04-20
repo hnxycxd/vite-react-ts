@@ -1,7 +1,7 @@
 import React, { Suspense, useEffect } from 'react';
 import { Menu } from 'antd';
 import { RouteComponentProps, Switch, Route } from 'react-router-dom';
-import { MenuInfo } from 'rc-menu/lib/interface';
+// import { MenuInfo } from 'rc-menu/lib/interface';
 import { getPageName } from 'src/utils';
 
 const { SubMenu } = Menu;
@@ -19,7 +19,7 @@ const List: React.FC<IProps> = (props) => {
   } = props;
 
   // 点击菜单跳转
-  const handleClick = (value: MenuInfo) => {
+  const handleClick = (value: any) => {
     history.push(value.key);
   };
 
