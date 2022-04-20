@@ -88,11 +88,11 @@ const otherRoute: IRouteItem[] = [
     component: lazy(() => import('../page/demo')),
   },
   {
-    key: 'chart',
-    path: '/chart',
+    key: 'price',
+    path: '/price',
     exact: true,
-    name: 'chart',
-    component: lazy(() => import('../page/chart')),
+    name: 'price',
+    component: lazy(() => import('../page/price')),
   },
 ];
 
