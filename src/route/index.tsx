@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect, useLayoutEffect } from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, HashRouter } from 'react-router-dom';
 import debounce from 'lodash/debounce';
 import Header from '../layout/header';
 import Content from '../layout/content';
@@ -22,7 +22,7 @@ const RootRoute = () => {
   //   };
   // }, []);
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Header route={mainRoute} />
       <Suspense fallback={null}>
         <Content>
@@ -43,7 +43,7 @@ const RootRoute = () => {
           </Switch>
         </Content>
       </Suspense>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 
